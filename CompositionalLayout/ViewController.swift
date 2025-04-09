@@ -52,7 +52,7 @@ class ViewController: UICollectionViewController {
                 section.orthogonalScrollingBehavior = .paging
                 return section
                 
-            } else {
+            } else if sectionNumber == 1 {
                 
                 let item = NSCollectionLayoutItem(
                     layoutSize: .init(
@@ -91,6 +91,24 @@ class ViewController: UICollectionViewController {
                 ]
                 
                 return section
+            } else {
+                let item = NSCollectionLayoutItem.init(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(1),
+                        heightDimension: .fractionalHeight(1)
+                    ))
+                item.contentInsets.trailing = 32
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(0.8),
+                        heightDimension: .absolute(125)
+                    ),
+                    subitems: [item]
+                )
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
+                section.contentInsets.leading = 16
+                return section
             }
             
         }
@@ -110,7 +128,7 @@ class ViewController: UICollectionViewController {
     static let categoryHeaderId = "categoryHeaderId"
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
