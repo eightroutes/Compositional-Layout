@@ -26,10 +26,10 @@ class ViewController: UICollectionViewController {
                     heightDimension: .fractionalHeight(1)
                 )
             )
-            item.contentInsets.trailing = 16
+            item.contentInsets.trailing = 2
             item.contentInsets.bottom = 16
-            item.contentInsets.top = 16
-            item.contentInsets.leading = 16
+//            item.contentInsets.top = 16
+//            item.contentInsets.leading = 16
             
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: .init(
@@ -39,11 +39,22 @@ class ViewController: UICollectionViewController {
                 subitems: [item]
             )
             let section = NSCollectionLayoutSection(group: group)
+            
+            // 가로 배너
+//            section.orthogonalScrollingBehavior = .continuous
+            section.orthogonalScrollingBehavior = .paging
             return section
         }
     }
     
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 3
+        }
         return 8
     }
     
@@ -65,8 +76,8 @@ class ViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        collectionView.backgroundColor = .black
-        navigationItem.title = "Food Delivery"
+        collectionView.backgroundColor = .white
+//        navigationItem.title = "Food Delivery"
         
         collectionView
             .register(
